@@ -1,15 +1,13 @@
 {
   "name": "Notenblick – Familien-Notenmanager",
   "short_name": "Notenblick",
-  "description": "Notenverwaltung für mehrere Kinder, Fächer und Schulzeiträume.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#f5f7fb",
   "theme_color": "#172554",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"}
   ]
 }
