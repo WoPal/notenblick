@@ -35,9 +35,9 @@
 const DEFAULT_SUBJECTS=['Mathematik','Deutsch','Englisch','Sachkunde','Biologie','Geschichte','Geografie','Sport','Musik','Kunst'];
 const TYPES=['Klassenarbeit','Test','Mündlich','Quartalsnote','Halbjahresnote','Jahresnote','Sonstige'];
 const STORE='notenblick_data_v1';
-const APP_VERSION="3.0.0";const APP_BUILD="2026-11-26";let db=load();let activeChildId=db.children[0]?.id||null;let selectedSubject='';let range='all';let gradeTypeFilter='all';
+const APP_VERSION="3.0.1";const APP_BUILD="2026-11-26";let db=load();let activeChildId=db.children[0]?.id||null;let selectedSubject='';let range='all';let gradeTypeFilter='all';
 let storageUnavailable=false;
-function load(){try{return JSON.parse(localStorage.getItem(STORE))||{children:[]}}catch{storageUnavailable=true;return{children:[]}}}
+function load(){try{const parsed=JSON.parse(localStorage.getItem(STORE))||{children:[]};if(!Array.isArray(parsed.children))parsed.children=[];const used=new Set();let repaired=false;parsed.children.forEach(c=>{if(!c.id||used.has(String(c.id))){c.id=uid();while(used.has(String(c.id)))c.id=uid();repaired=true;}used.add(String(c.id));});if(repaired){try{localStorage.setItem(STORE,JSON.stringify(parsed));}catch{storageUnavailable=true;}}return parsed;}catch{storageUnavailable=true;return{children:[]}}}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(db));storageUnavailable=false}catch{storageUnavailable=true}render();if(storageUnavailable)toast('Speicherung im Browser blockiert. Bitte regelmäßig „Daten exportieren“ nutzen')}
 function uid(){return Math.random().toString(36).slice(2,10)}
 function child(){return db.children.find(c=>c.id===activeChildId)}
